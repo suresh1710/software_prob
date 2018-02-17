@@ -1,5 +1,5 @@
 # COP 290 Design Project
-## Mahematical Model
+## Mathematical Model
 [Model link](#link1)
 ## 
 ## Functional Description
