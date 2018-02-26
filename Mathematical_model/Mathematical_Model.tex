@@ -1,0 +1,325 @@
+\documentclass{article}
+\usepackage{amsmath, amssymb}
+\setcounter{tocdepth}{4}
+\setcounter{secnumdepth}{4}
+\begin{document}
+
+\title{Mathematical Modelling}
+\author{Prasanth pdf creations}
+\date{10-01-2018}
+\maketitle
+\section{Dealing With 3D Object}
+\hspace{15mm} In this section we are going to talk about some functions which are involved in dealing with $3D$ objects
+\subsection{Assumptions in input}
+\begin{itemize}
+\item 3d coordinates of the vertices should be given .
+\item Vertices should be labelled .
+\item Connections between the vertices should be provided
+\end{itemize}
+
+\subsection{Work process}
+
+\hspace{15mm}We are going to consider 4 types of projections.
+Let A be \underline{any} vertex of the object and $R_{A}$ be the transformed co-ordinates after undergoing certain operation.The co-ordinates of A is given by $(x_{1},y_{1},z_{1})$
+\begin{equation}
+A=\left[\begin{matrix}
+x_{1}\\
+y_{1}\\
+z_{1}\\
+\end{matrix}\right]
+\end{equation}
+
+
+\subsubsection{Resolving Projections}
+\hspace{15mm} The projections can be classified based on field of view. They are :-
+\paragraph{Front View}or\hspace{5mm}\textbf{Projection on to YZ plane}\\\\
+Let $R_{F}$ be the operator when operated on point A ,results in the front view projection of the object .
+
+\begin{equation}
+  R_{A}=R_{F}*A
+\end{equation}
+
+\begin{equation} where\hspace{5mm}
+R_{F} =
+\left[\begin{matrix}
+0 & 0 & 0\\
+0 & 1 & 0\\
+0 & 0 & 1\\
+\end{matrix}\right]
+\end{equation}
+
+
+\paragraph{Top View} or \hspace{5mm}\textbf{Projection on to XY plane}\\
+Let $R_{T}$ be the operator when operated on point A ,results in the top view projection of the object .
+\begin{equation}
+  R_{A}=R_{T}A
+\end{equation}
+\begin{equation} where  \hspace{3mm}
+R_{T} =
+\left[\begin{matrix}
+1 & 0 & 0\\
+0 & 1 & 0\\
+0 & 0 & 0\\
+\end{matrix}\right]
+\end{equation}
+
+
+\paragraph{Side View} or\hspace{5mm} \textbf{Projection on to XZ plane}\\
+Let $R_{S}$ be the operator when operated on point A ,results in the side view projection of the object .
+
+\begin{equation}
+R_{A}=R_{S}A
+\end{equation}
+\begin{equation} where
+R_{S} =
+\left[\begin{matrix}
+1 & 0 & 0\\
+0 & 0 & 0\\
+0 & 0 & 1\\
+\end{matrix}\right]
+\end{equation}
+\paragraph{Auxillary view} or\hspace{3mm}\textbf{Projection on to plane($ax+by+cz+d=0$)}
+ \\
+
+\begin{equation} where
+R_{A} =
+\left[\begin{matrix}
+-\frac{ax_{1}+by_{1}+cz_{1}+d} {a^2+b^2+c^2} *a\\
+-\frac{ax_{1}+by_{1}+cz_{1}+d} {a^2+b^2+c^2} *b\\
+-\frac{ax_{1}+by_{1}+cz_{1}+d} {a^2+b^2+c^2} *c\\
+\end{matrix}\right]
++
+A
+\end{equation}
+
+
+\subsubsection{Translation}
+  If the point A $(x,y,z)$ is translated through $(X,Y,Z)$ then the resultant coordinates will be $(x+X,y+Y,z+Z)$
+ 
+ 
+\subsubsection{Rotation}
+
+\paragraph{Rotation about X}
+
+If the object is rotated about the X-axis with an angle $\theta$ then the new coordinates can be obtained through the Rotation matrix $R_{\theta}$ given by
+\begin{equation}
+R_{\theta} =
+\left[\begin{matrix}
+1&0&0\\0&cos\theta&-sin\theta\\0&sin\theta&cos\theta\\
+\end{matrix}\right]
+\end{equation}
+and the resulting coordinates of the will be $R_{A}$ is given by
+$R_{A} = R_{\theta}*A$
+
+\paragraph{Rotation about Y}
+
+If the object is rotated about the Y-axis with an angle $\alpha$ then the new coordinates can be obtained through the Rotation matrix $R_{\alpha}$ given by
+\begin{equation}
+R_{\alpha} =
+\left[\begin{matrix}
+cos\alpha & 0 &-sin\alpha\\
+0&1&0\\
+sin\alpha&0&cos\alpha\\
+\end{matrix}\right]
+\end{equation}
+and the resulting coordinates of the will be $R_{A}$ is given by
+$R_{A} = R_{\alpha}*A$
+
+\paragraph{Rotation about Z}
+
+If the object is rotated about the Z-axis with an angle $\beta$ then the new coordinates can be obtained through the Rotation matrix $R_{\beta}$ given by
+\begin{equation}
+R_{\beta} =
+\left[\begin{matrix}
+cos\beta&-sin\beta&0\\sin\beta&cos\beta&0\\0&0&1\\
+\end{matrix}\right]
+\end{equation}
+and the resulting coordinates of the will be $R_{A}$ is given by
+$R_{A} = R_{\theta}*A$
+and the resulting coordinates of the will be $R_{A}$ is given by
+$R_{A} = R_{\beta}*A$
+\paragraph{Rotation about arbitrary axis}
+ Rotation of a point in 3 dimensional space by theta about an arbitrary axes defined by a line between two points P1 = (x1,y1,z1) and P2 = (x2,y2,z2) can be achieved by the following steps
+
+    (1) translate space so that the rotation axis passes through the origin
+
+    (2) rotate space about the x axis so that the rotation axis lies in the xz plane
+
+    (3) rotate space about the y axis so that the rotation axis lies along the z axis
+
+    (4) perform the desired rotation by theta about the z axis
+
+    (5) apply the inverse of step (3)
+
+    (6) apply the inverse of step (2)
+
+    (7) apply the inverse of step (1)
+
+Note:
+\begin{itemize}
+\item  If the rotation axis is already aligned with the z axis then steps 2, 3, 5, and 6 need not be performed.
+
+\item    In all that follows a right hand coordinate system is assumed and rotations are positive when looking down the rotation axis towards the origin.
+
+\item    Symbols representing matrices will be shown in bold text.
+
+\item    The inverse of the rotation matrices below are particularly straightforward since the determinant is unity in each case.
+
+\item    All rotation angles are considered positive if anticlockwise looking down the rotation axis towards the origin.
+\end{itemize}
+Step 1
+
+Translate space so that the rotation axis passes through the origin. This is accomplished by translating space by -P1 (-x1,-y1,-z1). The translation matrix T and the inverse $T^{-1}$ (required for step 7) are given below
+\begin{equation}
+T=
+\left[\begin{matrix}
+1 & 0 & 0& $-x_{1}$\\
+0 & 1 & 0& $-y_{1}$\\
+0 & 0 & 1& $-z_{1}$\\
+0&0&0&1\\
+\end{matrix}\right],
+T^{-1}=
+\left[\begin{matrix}
+1 & 0 & 0& $x_{1}$\\
+0 & 1 & 0& $y_{1}$\\
+0 & 0 & 1& $z_{1}$\\
+0&0&0&1\\
+\end{matrix}\right]
+\end{equation}
+ Step 2
+
+Rotate space about the x axis so that the rotation axis lies in the xz plane. Let U = (a,b,c) be the unit vector along the rotation axis. and define d = sqrt($b^{2} + c^{2}$) as the length of the projection onto the yz plane. If d = 0 then the rotation axis is along the x axis and no additional rotation is necessary. Otherwise rotate the rotation axis so that is lies in the xz plane. The rotation angle to achieve this is the angle between the projection of rotation axis in the yz plane and the z axis. This can be calculated from the dot product of the z component of the unit vector U and its yz projection. The sine of the angle is determine by considering the cross product.
+\begin{equation}
+cos(t)=
+\frac{(0,0,c).(0,b,c)} {c*d}= \\
+\frac{c} {d},  
+sin(t)=
+||\frac{(0,0,c)X(0,b,c)} {c*d}||= \\
+\frac{b} {d}
+\end{equation}
+The rotation matrix $R_{x}$ and the inverse $R_{x}^{-1}$ (required for step 6) are given below
+\begin{equation}
+R_{x}  =
+\left[\begin{matrix}
+1 & 0 & 0& 0\\
+0 & \frac{c} {d} & -\frac{b} {d}& 0\\
+0 & \frac{b} {d} &\frac{c} {d} & 0\\
+0&0&0&1\\
+\end{matrix}\right],
+R_{x}^{-1}=
+\left[\begin{matrix}
+1 & 0 & 0& 0\\
+0 & \frac{c} {d} & \frac{b} {d}& 0\\
+0 & -\frac{b} {d} &\frac{c} {d} & 0\\
+0&0&0&1\\
+\end{matrix}\right]
+\end{equation}
+ Step 3
+
+Rotate space about the y axis so that the rotation axis lies along the positive z axis. Using the appropriate dot and cross product relationships as before the cosine of the angle is d, the sine of the angle is a. The rotation matrix about the y axis $R_{y}$ and the inverse $R_{y}^{-1}$ (required for step 5) are given below.
+\begin{equation}
+R_{y}  =
+\left[\begin{matrix}
+d & 0 & -a& 0\\
+0 & 1 & 0& 0\\
+a & 0&d & 0\\
+0&0&0&1\\
+\end{matrix}\right],
+R_{y}^{-1}=
+\left[\begin{matrix}
+d & 0 & a& 0\\
+0 & 1 & 0& 0\\
+-a & 0&d & 0\\
+0&0&0&1\\
+\end{matrix}\right]
+\end{equation}
+
+ Step 4
+
+Rotation about the z axis by t (theta) is Rz and is simply
+\begin{equation}
+R_{z}  =
+\left[\begin{matrix}
+cos(t) & -sin(t) & 0& 0\\
+sin(t)  & cos(t) & 0& 0\\
+0 & 0& 1& 0\\
+0&0&0&1\\
+\end{matrix}\right]
+
+\end{equation}
+
+
+The complete transformation to rotate a point (x,y,z) about the rotation axis to a new point (x',y',z') is as follows, the forward transforms followed by the reverse transforms.
+\begin{equation}
+\left[\begin{matrix}
+x'\\
+y'\\
+z'\\
+1\\
+\end{matrix}\right] =
+T^{-1}R_{x}^{-1}R_{y}^{-1}R_{z}R_{y}R_{x}T
+\left[\begin{matrix}
+x\\
+y\\
+z\\
+1\\
+\end{matrix}\right]
+
+\end{equation}
+   
+
+\subsubsection{Scaling}
+\hspace{15mm}If the object is scaled by a factor of $k$ then the resulting coordinates will be
+obtained by scaling matrix $S_{K}$ which is given by
+\begin{equation}
+S_{K} =
+\left[\begin{matrix}
+k & 0 & 0\\
+0 & k & 0\\
+0 & 0 & k\\
+\end{matrix}\right]
+\end{equation}
+and the resulting coordinates will be $R_{A}=S_{K}*A$
+\section{Regeneration of 3D object from projections}
+\subsection{Assumptions}
+\begin{itemize}
+\item Vertices must be labelled in all the provided projections.
+\item Three views must be provided,
+\item The geometric measurements must be provided for each edge in the projection separately.
+\item The projections must not have any curved lines.
+\end{itemize}
+
+\subsection{Work Process}
+\subsubsection{Flow of work}
+\begin{itemize}
+\item From projections $2D$ Vertices and $2D$ edges 
+\item From $2D$ vertices to $3D$ vertices
+\item From $2D$ edges to $3D$ edges
+\item From $3D$ edges to faces
+\end{itemize}
+\subsubsection{Description of work flow}
+\hspace{15mm} From the input, it is known that any vertex of the 3D object is represented in all the three views  - Front ,Top ,Side view , as A , A' , A'' respectively. The vertices in the view are labelled as follows :-
+\begin{itemize}
+\item[1.] The general form of the vertex A in Front view is $A =(x_{A},y,z)$
+\item[2.] The general form of the vertex A in Top view is $A' =(x,y,z_{A})$
+\item[3.] The general form of the vertex A in Side view is $A'' =(x,y_{A},z)$
+\end{itemize}
+\hspace{15mm} Here the $x_{A} , y_{A} , z_{A}$ are the variables and $x,y,z$ are constants .
+From the projections,the points can be classified into two groups:-
+\begin{itemize}
+\item Points that overlap on one another
+\item A black line or dotted line exists between two points
+\end{itemize}
+
+\hspace{15mm} From this we can formulate a list of pairs of vertex labels .\\
+\textbf{e.g:--} \\\textbf{1.} If $A'$ and $B'$ are overlapping in the top view ,then they can be represented as $(A',B')$ .\\
+\hspace{15mm} \textbf{2.} If $A''$ and $B''$ are connected by a dashed line , then they can be represented as $(A'',B'')$ .
+
+So , a set of orderpairs are obtained from each projection . From these three set of orderpairs - $T_{O}$ - set obtained from \textbf{top} view ,$F_{O}$ - set obtained from \textbf{front} view,$S_{O}$ - set obtained from \textbf{side} view , the set of original edges can be obtained by the following fact that a 3D edge appears in every projection as a point (overlapping) or as edge . The set of 3D edges $E$ are obtained by intersection of the three sets , $T_{O} ,F_{O} ,S_{O}$
+\begin{equation}
+E = T_O \cap F_O \cap S_O
+\end{equation}
+
+
+
+\end{document}
