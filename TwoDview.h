@@ -1,8 +1,8 @@
-#include<Vertice.h>
-#include<Line.h>
+#include<Vertices.h>
+#include<Lines.h>
 
 class twoDview{
      public: vector <Vertex2> ver;
-             vector <Line2>   sedg;
-             vector <Line2>   dedg;
+             vector <Line2>   sedg;//solid edges
+             vector <Line2>   dedg;//dotted edges
 }
