@@ -1,6 +1,6 @@
 #inculde<3dvertex>
 
-class 3dline (){
+class 3dline{
          public :double dirx;
                  double diry;
                  double dirz;
